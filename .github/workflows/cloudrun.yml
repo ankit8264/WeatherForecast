@@ -27,17 +27,14 @@ jobs:
     
     - name: Build
       run: |-
-        gcloud builds submit \
-          --quiet \
-          --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
-          --file = ./WeatherReport/Dockerfile \
+        gcloud config set project ${{ secrets.RUN_PROJECT }}
+        gcloud builds submit --tag gcr.io/${{ secrets.RUN_PROJECT }}/${{ secrets.GCP_APPLICATION }} --file ./WeatherReport/Dockerfile \
+        gcloud config set run/region us-central1
+        
       #Deploy image to cloud run
     - name: Deploy
       run: |-
-        gcloud run deploy "$SERVICE_NAME" \
-          --quiet \
-          --region "$RUN_REGION" \
-          --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
+        gcloud run deploy ${{ secrets.GCP_APPLICATION }}:v2 --image gcr.io/${{ secrets.RUN_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
           --platform "managed" \
           --allow-unauthenticated
         
