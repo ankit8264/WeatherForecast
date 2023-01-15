@@ -34,7 +34,7 @@ jobs:
       #Deploy image to cloud run
     - name: Deploy
       run: |-
-        gcloud run deploy ${{ secrets.GCP_APPLICATION }}:v2 --image gcr.io/${{ secrets.RUN_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
+        gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image gcr.io/${{ secrets.RUN_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
           --platform "managed" \
           --allow-unauthenticated
         
