@@ -28,7 +28,7 @@ jobs:
     - name: Build
       run: |-
         gcloud config set project ${{ secrets.RUN_PROJECT }}
-        gcloud builds submit --tag gcr.io/${{ secrets.RUN_PROJECT }}/${{ secrets.GCP_APPLICATION }} --f ./WeatherReport/Dockerfile .
+        gcloud builds submit --tag gcr.io/${{ secrets.RUN_PROJECT }}/${{ secrets.GCP_APPLICATION }} 
         gcloud config set run/region us-central1
         
       #Deploy image to cloud run
