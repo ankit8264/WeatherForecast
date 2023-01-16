@@ -48,5 +48,3 @@ jobs:
         gcloud run deploy ${{ secrets.GCP_APPLICATION }} --image gcr.io/${{ secrets.RUN_PROJECT }}/${{ secrets.GCP_APPLICATION }} \
           --platform "managed" \
           --allow-unauthenticated
-        
-        
