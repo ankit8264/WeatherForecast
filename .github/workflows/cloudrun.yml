@@ -24,6 +24,18 @@ jobs:
     - name: echo
       run: echo ${{ github.run_number }}
       
+    - name: Create release
+      uses: extenda/actions/conventional-release@v0
+      id: release
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Publish release
+      run: |
+          npm ci
+          npm version ${{ steps.release.outputs.version }} --no-git-tag-version
+          npm publish
+      
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
