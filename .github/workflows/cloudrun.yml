@@ -28,8 +28,9 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build dotnet solution
+      run: |
+        dotnet build WeatherReport.sln --configuration Release /p:Version=${{ steps.semver.outputs.semver }}
     - name: Test
       run: dotnet test --no-build --verbosity normal
       
