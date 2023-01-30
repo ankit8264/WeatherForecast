@@ -19,9 +19,10 @@ jobs:
     - name: Determine version
       uses: extenda/actions/conventional-version@v0
       id: semver
-       echo ${{ github.run_number }}
       with:
         build-number: ${{ github.run_number }}
+    - name: echo
+      run: echo ${{ github.run_number }}
       
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
